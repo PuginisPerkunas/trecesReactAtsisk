@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CheckBox, Button, SearchBar } from 'react-native-elements';
 import {
+    Alert,
   Platform,
   StyleSheet,
   Text,
@@ -55,7 +56,7 @@ export default class HomeScreen extends Component{
                  editable = {true}
                  maxLength = {20}
                  width = {300}
-                 style={{height: 40, borderColor: '#c4c4c4', borderWidth: 0.5,borderRadius:10,}}
+                 style={{height: 40, borderColor: '#c4c4c4', borderWidth: 1,borderRadius:10,}}
                  onChangeText={(autorius) => this.setState({autorius})}
                  />
 
@@ -66,7 +67,7 @@ export default class HomeScreen extends Component{
                  editable = {true}
                  maxLength = {20}
                  width = {300}
-                 style={{height: 40, borderColor: '#c4c4c4', borderWidth: 0.5, borderRadius:10}}
+                 style={{height: 40, borderColor: '#c4c4c4', borderWidth: 1, borderRadius:10}}
                  onChangeText={(metai) => this.setState({metai})}
                  />
 
@@ -77,7 +78,7 @@ export default class HomeScreen extends Component{
                  editable = {true}
                  maxLength = {20}
                  width = {300}
-                 style={{height: 40, borderColor: '#c4c4c4', borderWidth: 0.5,borderRadius:10}}
+                 style={{height: 40, borderColor: '#c4c4c4', borderWidth: 1,borderRadius:10}}
                  onChangeText={(puslapiai) => this.setState({puslapiai})}
                  />
 
@@ -111,21 +112,20 @@ export default class HomeScreen extends Component{
     saveData = () =>{
         let knygosInfo = {
             pavadinimas: this.state.pavadinimas,
+            autorius: this.state.autorius,
+            metai: this.state.metai,
+            puslapiai: this.state.puslapiai,
             skaityta: this.state.checked
         }
-       // let knygosPav = this.state.pavadinimas;
+      
         AsyncStorage.setItem('knyga',JSON.stringify(knygosInfo));
+        Alert.alert(
+            'Prideta!',
+            'Knyga pavadinimu: ' + '"'+ knygosInfo.pavadinimas + '"' + ' sekmingai prideta',
+            [
+              {text: 'OK', onPress: () => console.log('Puiku')},
+            ],
+            { cancelable: false }
+          )
     }
-
-    displayData = async () => {
-        try{
-            let info = await AsyncStorage.getItem('knyga');
-            let infoIskaidyta = JSON.parse(info);
-            alert(infoIskaidyta.pavadinimas + '' + infoIskaidyta.skaityta);
-        }
-        catch(err){
-            alert(err);
-        }
-    }
-
 }
