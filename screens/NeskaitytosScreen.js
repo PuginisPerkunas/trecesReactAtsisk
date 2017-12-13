@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { CheckBox, Button } from 'react-native-elements';
 import { DrawerNavigator } from 'react-navigation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
-    Alert,
+  Alert,
   Platform,
   StyleSheet,
   Text,
@@ -33,6 +34,13 @@ export default class NeskaitytosScreen extends React.Component{
 
     static navigationOptions = {
         drawerLabel: 'Neskaitytos knygos',
+        drawerIcon: ({ tintColor, focused }) => (
+            <Ionicons
+              name={focused ? 'ios-book' : 'ios-book'}
+              size={20}
+              style={{ color: tintColor }}
+            />
+          ),
     };
     render(){
         
@@ -105,7 +113,6 @@ export default class NeskaitytosScreen extends React.Component{
                 this.setState({autorius: infoIskaidyta.autorius})
                 this.setState({metai: infoIskaidyta.metai})
                 this.setState({puslapiai: infoIskaidyta.metai})
-                
             }
         }
         catch(err){

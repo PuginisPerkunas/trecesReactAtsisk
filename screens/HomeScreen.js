@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { CheckBox, Button, SearchBar } from 'react-native-elements';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
     Alert,
   Platform,
@@ -10,7 +11,6 @@ import {
   TouchableOpacity,
   AsyncStorage,
   ScrollView
- // AsyncStorage
 } from 'react-native';
 
 export default class HomeScreen extends Component{
@@ -29,6 +29,13 @@ export default class HomeScreen extends Component{
 
     static navigationOptions = {
         drawerLabel: 'Ideti knyga',
+        drawerIcon: ({ tintColor, focused }) => (
+            <Ionicons
+              name={focused ? 'ios-home' : 'ios-home-outline'}
+              size={20}
+              style={{ color: tintColor }}
+            />
+          ),
     };
     render(){
         return(
@@ -67,6 +74,7 @@ export default class HomeScreen extends Component{
                  editable = {true}
                  maxLength = {20}
                  width = {300}
+                 keyboardType = 'numeric'
                  style={{height: 40, borderColor: '#c4c4c4', borderWidth: 1, borderRadius:10}}
                  onChangeText={(metai) => this.setState({metai})}
                  />
@@ -78,6 +86,7 @@ export default class HomeScreen extends Component{
                  editable = {true}
                  maxLength = {20}
                  width = {300}
+                 keyboardType = 'numeric'
                  style={{height: 40, borderColor: '#c4c4c4', borderWidth: 1,borderRadius:10}}
                  onChangeText={(puslapiai) => this.setState({puslapiai})}
                  />
